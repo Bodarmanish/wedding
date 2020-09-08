@@ -1,0 +1,16 @@
+{
+    "host": "103.136.41.114",
+    "username": "aclzwzym",
+    "password": "zg4V+vTSH9a64[",
+    "remotePath": "public_html/wedding/wedding",
+    "protocol": "ftp",
+    "port": 0,
+    "fileNameEncoding": "utf8",
+    "autoUpload": true,
+    "autoDelete": false,
+    "autoDownload": false,
+    "ignore": [
+        ".git",
+        "/.vscode"
+    ]
+}
