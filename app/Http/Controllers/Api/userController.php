@@ -15,7 +15,6 @@ class userController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        // return $request->all();
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'invalid_credentials'], 400);
@@ -43,7 +42,7 @@ class userController extends Controller
         }
 
         $user = LeadModel::create([
-            'customer_name' => $request->get('name'),
+            'customer_name' => $request->get('customer_name'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
             'mobile' => $request->get('mobile'),

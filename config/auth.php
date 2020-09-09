@@ -41,6 +41,11 @@ return [
             'provider' => 'users',
         ],
         
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+
         'bsm' => [
             'driver' => 'session',
             'provider' => 'bsms',
@@ -91,6 +96,10 @@ return [
             'model' => App\User::class,
         ],
 
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\admin::class,
+        ],
         'bsms' => [
             'driver' => 'eloquent',
             'model' => App\Bsm::class,

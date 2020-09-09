@@ -56,13 +56,23 @@ License: You must have a valid license purchased only from themeforest(the above
 									<strong>Wrong Username or Password!</strong>
 								</div>
 
-								<form class="kt-form" method="post" id="lgn_form">
+								<form class="kt-form" action="{{ url('admin') }}" method="post" id="lgn_form">
 									@csrf
-									<div class="input-group">
-										<input class="form-control" type="email" placeholder="Email" name="email" autocomplete="off" id="email">
+									<div class="form-group row">
+										<div class="col-lg-12">
+											<input class="form-control" type="email" placeholder="Email" name="email" autocomplete="off" id="email">
+											@error('email')
+												<span style="color: red;">{{ $message }}</span>
+											@enderror
+										</div>
 									</div>
-									<div class="input-group">
+									<div class="form-group row">
+										<div class="col-lg-12">
 										<input class="form-control" type="password" placeholder="Password" name="password" id="password">
+										@error('password')
+											<span style="color: red;">{{ $message }}</span>
+										@enderror
+										</div>
 									</div>
 									<div class="row kt-login__extra">
 										<div class="col">
@@ -73,7 +83,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										</div>
 									</div>
 									<div class="kt-login__actions">
-										<button id="admin_lgn_btn" class="btn btn-brand btn-elevate kt-login__btn-primary" type="submit">Sign In</button>
+										<button  class="btn btn-brand btn-elevate kt-login__btn-primary" type="submit">Sign In</button>
 									</div>
 								</form>
 							</div>
@@ -110,9 +120,6 @@ License: You must have a valid license purchased only from themeforest(the above
 		{{-- <script src="{{ asset('assets/js/pages/custom/login/login-general.js') }}" type="text/javascript"></script> --}}
 		<script>
 			$(document).ready(function () {
-
-
-
 				$("#lgn_form").validate({
 					rules:
 					{
@@ -153,44 +160,6 @@ License: You must have a valid license purchased only from themeforest(the above
 						} else {
 							error.insertAfter(element);
 						}
-					}
-				});
-
-				$("#admin_lgn_btn").on("click", function (e)
-				{
-					var email = $('#email').val();
-					var password = $('#password').val();
-
-					e.preventDefault();
-					if ($("#lgn_form").valid())
-					{
-						$.ajax({
-							type: "POST",
-							url: "{{ url('admin_login') }}",
-							// data: new FormData($('#lgn_form')[0]),
-							data:{
-								'_token': $('input[name="_token"]').val(),
-								'email' : email,
-								'password' : password
-							},
-							// processData: false,
-							// contentType: false,
-							success: function (data)
-							{
-								if (data.status === 'success') 
-								{
-									window.location = '{{ route('admin.dashboard') }}';
-								}
-								else if (data.status === 'error') 
-								{
-									$('.login_failed').show();
-								}
-							}
-						});
-					}
-					else
-					{
-						e.preventDefault();
 					}
 				});
 			});
